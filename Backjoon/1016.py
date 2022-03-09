@@ -1,16 +1,20 @@
 # https://www.acmicpc.net/problem/1016 // 2.28
-min, max = map(int,input().split())
-cnt = 0
-result = False
-for i in range(min,max+1):
-    for j in range(2,i):
-        if i % j **2 != 0 and i < 10:
-            cnt += 1
-            break
-        
+min_n, max_n = map(int,input().split())
 
-        
+eratos = [False for _ in range(max_n - min_n + 2)]
 
-            
-            
-print(1000,cnt)
+cnt = max_n - min_n + 1
+
+i = 2
+while i**2 <= max_n:
+    s = min_n // (i**2)
+    if min_n %(i**2) != 0:
+        s += 1
+    while s*(i**2) <= max_n:
+        if not eratos[s*(i**2) - min_n ]:
+            eratos[s*(i**2) - min_n] = True
+            cnt -=1
+        s+=1
+    i+=1
+print(cnt)
+        
